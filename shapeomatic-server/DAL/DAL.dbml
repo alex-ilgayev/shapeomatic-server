@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="LocalDB" Class="DALDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\LocalDB.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="LocalDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.[user]" Member="users">
+    <Type Name="user">
+      <Column Name="facebookId" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="pic" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="score" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="user_friend" Member="friends" ThisKey="facebookId" OtherKey="facebookId1" Type="friend" />
+      <Association Name="user_friend1" Member="friends1" ThisKey="facebookId" OtherKey="facebookId2" Type="friend" />
+    </Type>
+  </Table>
+  <Table Name="dbo.friend" Member="friends">
+    <Type Name="friend">
+      <Column Name="facebookId1" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="facebookId2" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="user_friend" Member="user" ThisKey="facebookId1" OtherKey="facebookId" Type="user" IsForeignKey="true" />
+      <Association Name="user_friend1" Member="user1" ThisKey="facebookId2" OtherKey="facebookId" Type="user" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
